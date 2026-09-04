@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Catálogo de Modelos</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* CABEÇALHO */
+
+header {
+    background: #111;
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 10px 0 0;
+}
+
+/* AVISO DE PREÇO */
+
+.aviso {
+    background: white;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px #0002;
+}
+
+.aviso strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* CATÁLOGO */
+
+.catalogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+    padding: 15px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* PRODUTO */
+
+.produto {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px #0002;
+    padding-bottom: 15px;
+}
+
+.produto img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    background: #ddd;
+}
+
+.produto h2 {
+    text-align: center;
+    margin: 12px 5px 5px;
+}
+
+.modelo {
+    text-align: center;
+    color: #777;
+    margin: 5px;
+}
+
+.preco {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+/* CONTROLE DE QUANTIDADE */
+
+.quantidade {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 12px;
+}
+
+.quantidade button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    cursor: pointer;
+    background: #111;
+    color: white;
+}
+
+.quantidade span {
+    font-size: 20px;
+    font-weight: bold;
+    min-width: 25px;
+    text-align: center;
+}
+
+.adicionar {
+    display: block;
+    width: calc(100% - 30px);
+    margin: auto;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: #111;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* BOTÃO DO CARRINHO */
+
+.carrinho-botao {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1000;
+
+    border: none;
+    border-radius: 50px;
+
+    padding: 15px 20px;
+
+    background: #25D366;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    box-shadow: 0 4px 15px #0004;
+
+    cursor: pointer;
+}
+
+/* ABA DO PEDIDO */
+
+.painel {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 450px;
+    height: 100%;
+
+    background: white;
+
+    z-index: 2000;
+
+    box-shadow: -5px 0 20px #0004;
+
+    transition: 0.3s;
+
+    overflow-y: auto;
+
+    padding: 20px;
+}
+
+.painel.aberto {
+    right: 0;
+}
+
+.fechar {
+    border: none;
+    background: #eee;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.painel h2 {
+    margin-top: 20px;
+}
+
+/* ITENS DO PEDIDO */
+
+.item-pedido {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+}
+
+.item-pedido strong {
+    display: block;
+}
+
+.item-pedido small {
+    color: #777;
+}
+
+.item-controle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.item-controle button {
+    border: none;
+    padding: 7px 11px;
+    border-radius: 7px;
+    background: #eee;
+    cursor: pointer;
+}
+
+/* TOTAL */
+
+.resumo {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.total {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* WHATSAPP */
+
+.whatsapp {
+    display: block;
+    width: 100%;
+    border: none;
+
+    margin-top: 15px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: #25D366;
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.limpar {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #ddd;
+
+    cursor: pointer;
+}
+
+/* CAMPO NOME */
+
+input {
+    width: 100%;
+    padding: 13px;
+    margin-top: 8px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+</style>
+
+</head>
+
+
+<body>    
+   
+<header>
+
+    <h1>🛍️ Meu Catálogo</h1>
+
+    <p>Escolha seus modelos e monte seu pedido</p>
+
+</header>
+
+
+<div class="aviso">
+
+    <strong>💰 Tabela de preços</strong>
+
+    <div>Varejo: <b>R$ 15,00</b> por peça</div>
+
+    <div>Atacado: <b>R$ 12,00</b> por peça a partir de 6 peças</div>
+
+</div>
+
+
+<!-- OS 30 MODELOS APARECEM AQUI -->
+
+<main class="catalogo" id="catalogo"></main>
+
+
+<!-- BOTÃO PEDIDO -->
+
+<button class="carrinho-botao" onclick="abrirPedido()">
+
+    🛒 Meu pedido (<span id="quantidadeTotal">0</span>)
+
+</button>
+
+
+<!-- ABA DO PEDIDO -->
+
+<div class="painel" id="painel">
+
+    <button class="fechar" onclick="fecharPedido()">
+        ✕ Fechar
+    </button>
+
+    <h2>🛒 Meu pedido</h2>
+
+
+    <label>
+
+        Nome do cliente:
+
+        <input
+            type="text"
+            id="nomeCliente"
+            placeholder="Digite seu nome">
+
+    </label>
+
+
+    <div id="listaPedido">
+
+        <p>
+            Seu pedido está vazio.
+        </p>
+
+    </div>
+
+
+    <div class="resumo">
+
+        <div>
+            Quantidade:
+            <strong id="resumoQuantidade">0</strong> peças
+        </div>
+
+        <div id="tipoPreco">
+            Varejo
+        </div>
+
+        <div>
+            Preço por peça:
+            <strong id="precoAtual">R$ 15,00</strong>
+        </div>
+
+        <div class="total">
+
+            Total:
+            <span id="total">R$ 0,00</span>
+
+        </div>
+
+    </div>
+
+
+    <button class="whatsapp" onclick="enviarWhatsApp()">
+
+        📲 Enviar pedido pelo WhatsApp
+
+    </button>
+
+
+    <button class="limpar" onclick="limparPedido()">
+
+        🗑️ Limpar pedido
+
+    </button>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   CONFIGURAÇÃO DOS 30 MODELOS
+========================================= */
+
+const produtos = [
+
+    {
+     nome: "Modelo 01",
+        imagem: "imagens/modelo01.png"
+       
+    },
+
+    {
+        nome: "Modelo 02",
+        imagem: "imagens/modelo02.jpg"
+    },
+
+    {
+        nome: "Modelo 03",
+        imagem: "imagens/modelo03.jpg"
+    },
+
+    {
+        nome: "Modelo 04",
+        imagem: "imagens/modelo04.jpg"
+    },
+
+    {
+        nome: "Modelo 05",
+        imagem: "imagens/modelo05.jpg"
+    },
+
+    {
+        nome: "Modelo 06",
+        imagem: "imagens/modelo06.jpg"
+    },
+
+    {
+        nome: "Modelo 07",
+        imagem: "imagens/modelo07.jpg"
+    },
+
+    {
+        nome: "Modelo 08",
+        imagem: "imagens/modelo08.jpg"
+    },
+
+    {
+        nome: "Modelo 09",
+        imagem: "imagens/modelo09.jpg"
+    },
+
+    {
+        nome: "Modelo 10",
+        imagem: "imagens/modelo10.jpg"
+    },
+
+    {
+        nome: "Modelo 11",
+        imagem: "imagens/modelo11.jpg"
+    },
+
+    {
+        nome: "Modelo 12",
+        imagem: "imagens/modelo12.jpg"
+    },
+
+    {
+        nome: "Modelo 13",
+        imagem: "imagens/modelo13.jpg"
+    },
+
+    {
+        nome: "Modelo 14",
+        imagem: "imagens/modelo14.jpg"
+    },
+
+    {
+        nome: "Modelo 15",
+        imagem: "imagens/modelo15.jpg"
+    },
+
+    {
+        nome: "Modelo 16",
+        imagem: "imagens/modelo16.jpg"
+    },
+
+    {
+        nome: "Modelo 17",
+        imagem: "imagens/modelo17.jpg"
+    },
+
+    {
+        nome: "Modelo 18",
+        imagem: "imagens/modelo18.jpg"
+    },
+
+    {
+        nome: "Modelo 19",
+        imagem: "imagens/modelo19.jpg"
+    },
+
+    {
+        nome: "Modelo 20",
+        imagem: "imagens/modelo20.jpg"
+    },
+
+    {
+        nome: "Modelo 21",
+        imagem: "imagens/modelo21.jpg"
+    },
+
+    {
+        nome: "Modelo 22",
+        imagem: "imagens/modelo22.jpg"
+    },
+
+    {
+        nome: "Modelo 23",
+        imagem: "imagens/modelo23.jpg"
+    },
+
+    {
+        nome: "Modelo 24",
+        imagem: "imagens/modelo24.jpg"
+    },
+
+    {
+        nome: "Modelo 25",
+        imagem: "imagens/modelo25.jpg"
+    },
+
+    {
+        nome: "Modelo 26",
+        imagem: "imagens/modelo26.jpg"
+    },
+
+    {
+        nome: "Modelo 27",
+        imagem: "imagens/modelo27.jpg"
+    },
+
+    {
+        nome: "Modelo 28",
+        imagem: "imagens/modelo28.jpg"
+    },
+
+    {
+        nome: "Modelo 29",
+        imagem: "imagens/modelo29.jpg"
+    },
+
+    {
+        nome: "Modelo 30",
+        imagem: "imagens/modelo30.jpg"
+    }
+
+];
+
+
+/* =========================================
+   PEDIDO
+========================================= */
+
+let pedido = {};
+
+
+/* =========================================
+   MOSTRAR OS 30 PRODUTOS
+========================================= */
+
+const catalogo = document.getElementById("catalogo");
+
+
+produtos.forEach((produto, index) => {
+
+    const card = document.createElement("div");
+
+    card.className = "produto";
+
+
+    card.innerHTML = `
+
+        <img
+            src="${produto.imagem}"
+            alt="${produto.nome}"
+            onerror="this.src='https://via.placeholder.com/500x500?text=Foto+do+Modelo'">
+
+        <h2>${produto.nome}</h2>
+
+        <p class="modelo">
+            Selecione a quantidade
+        </p>
+
+        <p class="preco">
+            A partir de R$ 12,00
+        </p>
+
+        <div class="quantidade">
+
+            <button onclick="alterarQuantidade(${index}, -1)">
+                −
+            </button>
+
+            <span id="qtd-${index}">
+                0
+            </span>
+
+            <button onclick="alterarQuantidade(${index}, 1)">
+                +
+            </button>
+
+        </div>
+
+        <button
+            class="adicionar"
+            onclick="adicionarPedido(${index})">
+
+            Adicionar ao pedido
+
+        </button>
+
+    `;
+
+
+    catalogo.appendChild(card);
+
+});
+
+
+/* =========================================
+   ALTERAR QUANTIDADE
+========================================= */
+
+function alterarQuantidade(index, valor) {
+
+    const atual =
+        pedido[index] || 0;
+
+
+    let novaQuantidade =
+        atual + valor;
+
+
+    if (novaQuantidade < 0) {
+
+        novaQuantidade = 0;
+
+    }
+
+
+    if (novaQuantidade === 0) {
+
+        delete pedido[index];
+
+    } else {
+
+        pedido[index] = novaQuantidade;
+
+    }
+
+
+    atualizarTela();
+
+}
+
+
+/* =========================================
+   ADICIONAR AO PEDIDO
+========================================= */
+
+function adicionarPedido(index) {
+
+    if (!pedido[index]) {
+
+        pedido[index] = 1;
+
+    }
+
+    atualizarTela();
+
+    abrirPedido();
+
+}
+
+
+/* =========================================
+   CALCULAR TOTAL DE PEÇAS
+========================================= */
+
+function calcularQuantidadeTotal() {
+
+    return Object.values(pedido)
+        .reduce(
+            (total, quantidade) => total + quantidade,
+            0
+        );
+
+}
+
+
+/* =========================================
+   DEFINIR PREÇO
+========================================= */
+
+function calcularPreco() {
+
+    const quantidade =
+        calcularQuantidadeTotal();
+
+
+    /*
+       1 até 5 peças = R$15
+       6 ou mais = R$12
+    */
+
+    if (quantidade >= 6) {
+
+        return 12;
+
+    }
+
+    return 15;
+
+}
+
+
+/* =========================================
+   ATUALIZAR TELA
+========================================= */
+
+function atualizarTela() {
+
+    const quantidade =
+        calcularQuantidadeTotal();
+
+
+    const preco =
+        calcularPreco();
+
+
+    const total =
+        quantidade * preco;
+
+
+    document.getElementById(
+        "quantidadeTotal"
+    ).textContent = quantidade;
+
+
+    document.getElementById(
+        "resumoQuantidade"
+    ).textContent = quantidade;
+
+
+    document.getElementById(
+        "precoAtual"
+    ).textContent =
+        formatarMoeda(preco);
+
+
+    document.getElementById(
+        "total"
+    ).textContent =
+        formatarMoeda(total);
+
+
+    if (quantidade >= 6) {
+
+        document.getElementById(
+            "tipoPreco"
+        ).innerHTML =
+            "📦 <strong>Preço de atacado</strong>";
+
+    } else {
+
+        document.getElementById(
+            "tipoPreco"
+        ).innerHTML =
+            "🛍️ <strong>Preço de varejo</strong>";
+
+    }
+
+
+    /* Atualizar números dos produtos */
+
+    produtos.forEach((produto, index) => {
+
+        const elemento =
+            document.getElementById(
+                `qtd-${index}`
+            );
+
+
+        if (elemento) {
+
+            elemento.textContent =
+                pedido[index] || 0;
+
+        }
+
+    });
+
+
+    atualizarListaPedido();
+
+}
+
+
+/* =========================================
+   LISTA DO PEDIDO
+========================================= */
+
+function atualizarListaPedido() {
+
+    const lista =
+        document.getElementById(
+            "listaPedido"
+        );
+
+
+    const itens =
+        Object.keys(pedido);
+
+
+    if (itens.length === 0) {
+
+        lista.innerHTML = `
+            <p>
+                Seu pedido está vazio.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    lista.innerHTML = "";
+
+
+    itens.forEach(index => {
+
+        const quantidade =
+            pedido[index];
+
+
+        const produto =
+            produtos[index];
+
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "item-pedido";
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${produto.nome}
+            </strong>
+
+            <small>
+                ${quantidade} peça(s)
+            </small>
+
+            <div class="item-controle">
+
+                <span>
+                    ${formatarMoeda(
+                        quantidade *
+                        calcularPreco()
+                    )}
+                </span>
+
+                <div>
+
+                    <button
+                        onclick="alterarQuantidade(${index}, -1)">
+                        −
+                    </button>
+
+                    <button
+                        onclick="alterarQuantidade(${index}, 1)">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        lista.appendChild(div);
+
+    });
+
+}
+
+
+/* =========================================
+   ABRIR PEDIDO
+========================================= */
+
+function abrirPedido() {
+
+    document
+        .getElementById("painel")
+        .classList
+        .add("aberto");
+
+}
+
+
+/* =========================================
+   FECHAR PEDIDO
+========================================= */
+
+function fecharPedido() {
+
+    document
+        .getElementById("painel")
+        .classList
+        .remove("aberto");
+
+}
+
+
+/* =========================================
+   LIMPAR PEDIDO
+========================================= */
+
+function limparPedido() {
+
+    pedido = {};
+
+    atualizarTela();
+
+}
+
+
+/* =========================================
+   FORMATAR DINHEIRO
+========================================= */
+
+function formatarMoeda(valor) {
+
+    return valor.toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+
+}
+
+
+/* =========================================
+   ENVIAR PARA O WHATSAPP
+========================================= */
+
+function enviarWhatsApp() {
+
+    const quantidade =
+        calcularQuantidadeTotal();
+
+
+    if (quantidade === 0) {
+
+        alert(
+            "Adicione pelo menos um modelo ao pedido."
+        );
+
+        return;
+
+    }
+
+
+    const nome =
+        document
+        .getElementById("nomeCliente")
+        .value
+        .trim();
+
+
+    const preco =
+        calcularPreco();
+
+
+    const total =
+        quantidade * preco;
+
+
+    let mensagem =
+        "🛍️ *NOVO PEDIDO*%0A%0A";
+
+
+    if (nome) {
+
+        mensagem +=
+            "👤 Cliente: " +
+            encodeURIComponent(nome) +
+            "%0A%0A";
+
+    }
+
+
+    mensagem +=
+        "📦 *Itens do pedido:*%0A";
+
+
+    Object.keys(pedido).forEach(index => {
+
+        const produto =
+            produtos[index];
+
+
+        const quantidadeProduto =
+            pedido[index];
+
+
+        mensagem +=
+            "• " +
+            encodeURIComponent(
+                produto.nome
+            ) +
+            " — " +
+            quantidadeProduto +
+            " peça(s)%0A";
+
+    });
+
+
+    mensagem += "%0A";
+
+
+    if (quantidade >= 6) {
+
+        mensagem +=
+            "📦 Preço: ATACADO%0A";
+
+    } else {
+
+        mensagem +=
+            "🛍️ Preço: VAREJO%0A";
+
+    }
+
+
+    mensagem +=
+        "Quantidade total: " +
+        quantidade +
+        " peça(s)%0A";
+
+
+    mensagem +=
+        "Valor por peça: R$ " +
+        preco.toFixed(2).replace(".", ",") +
+        "%0A";
+
+
+    mensagem +=
+        "💰 *TOTAL: R$ " +
+        total.toFixed(2).replace(".", ",") +
+        "*";
+
+
+    const url =
+        "https://wa.me/?text=" +
+        mensagem;
+
+
+    window.open(
+        url,
+        "_blank"
+    );
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+atualizarTela();
+
+</script>
+
+
+</body>
+
+</html>
+    
